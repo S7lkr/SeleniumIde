@@ -11,21 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo on the runner
+    - name: Checkout repo on remote runner
       uses: actions/checkout@v4
     - name: Set up .NET Core
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 6.0.x
-    - name: Install Chrome
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y google-chrome-stable
-    - name: Install dependencies
+    # - name: Install Chrome
+    #   run: |
+    #     sudo apt-get update
+    #     sudo apt-get install -y google-chrome-stable
+    - name: Restore dependencies
       run: dotnet restore
     - name: Build app
       run: dotnet build --no-restore
-    - name: Run tests
-      env:
-        CHROMEWEBDRIVER: /usr/bin/google-chrome
+    - name: Run UI tests
       run: dotnet test --verbosity normal
