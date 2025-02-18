@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Run dotnet tests') {
             steps {
-                bat 'dotnet test --logger "trx;LogFileName=test-results.trx"'
+                bat 'dotnet test'
             }
         }
     }
